@@ -1,6 +1,6 @@
 import "react-native-gesture-handler";
-import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { StatusBar, Linking } from "expo-status-bar";
 import axios from "axios";
 import {
   SimpleLineIcons,
@@ -13,46 +13,32 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
-  TextInput,
-  TouchableOpacity,
   Image,
 } from "react-native";
-import { setLoading } from "./Screen/loader";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import {
-  createDrawerNavigator,
-  DrawerItemList,
-} from "@react-navigation/drawer";
-const Stack = createNativeStackNavigator();
+import { createDrawerNavigator, DrawerItemList } from "@react-navigation/drawer";
+const Drawer = createDrawerNavigator();
 
 import ProfileScreen from "./Screen/ProfileScreen";
 import Contact from "./Screen/contact";
 import Categories from "./Screen/Categories";
+import Privacypolicy from "./Screen/Privacypolicy";
+import Terms from "./Screen/Terms";
 import User from "./assets/icon.png";
+import Footer from "./Screen/Footer";
 import ForgetPassword from "./Screen/ForgetPassword";
 
 axios.defaults.baseURL = "https://dev.trieazy.com/api/v2/";
-const Drawer = createDrawerNavigator();
-
-function MyDrawer() {
-  return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Login" component={ProfileScreen} />
-      <Drawer.Screen name="Contact" component={Contact} />
-      <Drawer.Screen name="Contact" component={Categories} />
-    </Drawer.Navigator>
-  );
-}
 
 export default function App() {
+  const openAboutUsUrl = () => {
+    const url = "https://www.trieazy.com/about-us";
+    Linking.openURL(url);
+  };
+
   return (
     <NavigationContainer>
-      <Stack.Screen name="Login" component={ProfileScreen} />
-      <Stack.Screen name="ForgotPassword" component={ForgetPassword} />
-
       <Drawer.Navigator
         drawerContent={(props) => {
           return (
@@ -188,10 +174,10 @@ export default function App() {
         />
 
         <Drawer.Screen
-          name="Get Premium"
+          name="Terms"
           options={{
-            drawerLabel: "Get Premuim",
-            title: "Get Premium",
+            drawerLabel: "Terms",
+            title: "Terms",
             drawerIcon: () => (
               <MaterialCommunityIcons
                 name="certificate"
@@ -200,18 +186,29 @@ export default function App() {
               />
             ),
           }}
-          component={Contact}
+          component={Terms}
         />
         <Drawer.Screen
-          name="Rate this App"
+          name="Footer"
           options={{
-            drawerLabel: "Rate this App",
-            title: "Rate this App",
+            drawerLabel: "Footer",
+            title: "Footer",
             drawerIcon: () => (
               <FontAwesome name="star" size={20} color="#808080" />
             ),
           }}
-          component={Contact}
+          component={Footer}
+        />
+        <Drawer.Screen
+          name="Privacypolicy"
+          options={{
+            drawerLabel: "Privacypolicy",
+            title: "Privacypolicy",
+            drawerIcon: () => (
+              <MaterialIcons name="backup" size={20} color="#808080" />
+            ),
+          }}
+          component={Privacypolicy}
         />
 
         <Drawer.Screen
@@ -226,6 +223,7 @@ export default function App() {
                 color="#808080"
               />
             ),
+            onPress: openAboutUsUrl, // Handle navigation to external URL
           }}
           component={Contact}
         />
