@@ -1,26 +1,51 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import axios from "axios";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import Privacypolicy from "./Privacypolicy";
 
+const Footer = ({ navigation }) => {
 
+  const Aboutus = () => {
+    setIsClicked(true);
+    navigation.navigate('Aboutus');
+  };
+  const Coupons = () => {
+    setIsClicked(true);
+    navigation.navigate('Coupons');
+  };
+  const Faq = () => {
+    setIsClicked(true);
+    navigation.navigate('Faq');
+  };
+  const Privacypolicy = () => {
+    setIsClicked(true);
+    navigation.navigate('Privacypolicy');
+  };
 
-export default function Footer() {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-
-      <Text style={styles.title}> Footer </Text>
+      <View>
+        <Text>
+            About
+        </Text>
+      </View>
+      <TouchableOpacity onPress={Aboutus}>
+        <Text>About us</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={Coupons}>
+        <Text>Coupons</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={Faq}>
+        <Text>FAQ</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={Privacypolicy}>
+        <Text>Privacypolicy</Text>
+      </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -30,44 +55,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     display: "block",
   },
-  textsyle: {
-    backgroundColor: "red",
-    fontSize: 12,
-    justifyContent: "center",
-    alignItems: "center",
-    display: "flex",
-  },
-  title: {
-    fontWeight: "bold",
-    fontSize: 50,
-    color: "#fb5b5a",
-    marginBottom: 40,
-  },
-  inputView: {
-    width: "80%",
-    backgroundColor: "#3AB4BA",
-    borderRadius: 25,
-    height: 50,
-    marginBottom: 20,
-    justifyContent: "center",
-    padding: 20,
-  },
-  inputText: {
-    height: 50,
-    color: "white",
-  },
-  forgotAndSignUpText: {
-    color: "white",
-    fontSize: 11,
-  },
-  loginBtn: {
-    width: "80%",
-    backgroundColor: "#fb5b5a",
-    borderRadius: 25,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 40,
-    marginBottom: 10,
-  },
+
+ 
 });
+
+export default Footer;
